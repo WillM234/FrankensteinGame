@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     #region Menu Stuff
     public Canvas MainCanvas;
     private MenuController MController;
+    public GameObject PlayerUI1, PlayerUI2;
     #endregion
     private void Awake()
     {
@@ -20,54 +21,59 @@ public class PlayerMovement : MonoBehaviour
     PlayerParent = GameObject.Find("Player"); BottomPlayer = GameObject.Find("BottomPlayer"); TopPlayer = GameObject.Find("TopPlayer");//Finding Player objects
     ParentRB = PlayerParent.GetComponent<Rigidbody2D>();
     worldFlip = PlayerParent.GetComponent<WorldFlip>();
+    PlayerUI1.SetActive(false); PlayerUI2.SetActive(false);
     }
     void Update()
     {
     ///////////Player Controls///////////////
     ///Player Controls are enabled after the game actually starts///
-    if(MController.GameStarted == true || MController.GamePaused == false)
+    if(MController.GameStarted == true )
         {
-    /////Left or Right Movement of the player *NOTE* that the controls are based on which camera is active to ensure the controls stay the same./////
-            x = 0.0f;
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            if(MController.GamePaused == false)
             {
+                /////Left or Right Movement of the player *NOTE* that the controls are based on which camera is active to ensure the controls stay the same./////
+                x = 0.0f;
+                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                {
+                    if (worldFlip.CamTracker == 1)
+                    {
+                        x = speed;
+                    }
+                    else if (worldFlip.CamTracker == 2)
+                    {
+                        x = speed;
+                    }
+                }//Right movement 
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                {
+                    if (worldFlip.CamTracker == 1)
+                    {
+                        x = -speed;
+                    }
+                    else if (worldFlip.CamTracker == 2)
+                    {
+                        x = -speed;
+                    }
+                }//Left movement
                 if (worldFlip.CamTracker == 1)
                 {
-                    x = speed;
+                    BottomRB = BottomPlayer.GetComponent<Rigidbody2D>();
+                    BottomRB.velocity = ParentRB.velocity;
                 }
-                else if (worldFlip.CamTracker == 2)
+                if (worldFlip.CamTracker == 2)
                 {
-                    x = speed;
+                    TopRB = TopPlayer.GetComponent<Rigidbody2D>();
+                    TopRB.velocity = ParentRB.velocity;
                 }
-            }//Right movement 
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            {
-                if (worldFlip.CamTracker == 1)
+                ParentRB.velocity = new Vector2(x, 0f);
+                /////Pause menu controls/////
+                if (Input.GetKeyDown(KeyCode.P))
                 {
-                    x = -speed;
+                    MController.GamePaused = true;
+                    PlayerUI1.SetActive(false);
+                    PlayerUI2.SetActive(false);
                 }
-                else if (worldFlip.CamTracker == 2)
-                {
-                    x = -speed;
-                }
-            }//Left movement
-            if (worldFlip.CamTracker == 1)
-            {
-                BottomRB = BottomPlayer.GetComponent<Rigidbody2D>();
-                BottomRB.velocity = ParentRB.velocity;
-            }
-            if (worldFlip.CamTracker == 2)
-            {
-                TopRB = TopPlayer.GetComponent<Rigidbody2D>();
-                TopRB.velocity = ParentRB.velocity;
-            }
-            ParentRB.velocity = new Vector2(x, 0f);
-    /////Pause menu controls/////
-            if(Input.GetKeyDown(KeyCode.P))
-            {
-                MController.GamePaused = true;
             }
         }
-   
     }
 }
