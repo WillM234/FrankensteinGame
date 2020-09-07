@@ -12,7 +12,9 @@ public class CustomizationController : MonoBehaviour
     #endregion
     #region Menu Objects
     [Header("Menu Objects")]
+    public RawImage PlayerPreview;
     public Slider SpriteSelector, BlueSlider, RedSlider, GreenSlider, AlphaSlider;
+    public Texture Char1, Char2, Char3;
     private float BlueValue, RedValue, GreenValue, AlphaValue;
     private Color PlayerColor;
     #endregion
@@ -26,6 +28,7 @@ public class CustomizationController : MonoBehaviour
     {
     PlayerColor = new Color(RedValue, GreenValue, BlueValue, AlphaValue);
     TopRenderer.color = PlayerColor; BottomRenderer.color = PlayerColor;
+    PlayerPreview.color = PlayerColor;
     }
     public void BlueChanger()
     {
@@ -49,16 +52,19 @@ public class CustomizationController : MonoBehaviour
         {
             TopRenderer.sprite = Character1;
             BottomRenderer.sprite = Character1;
+            PlayerPreview.texture = Char1;
         }
     if (SpriteSelector.value == 2)
         {
             TopRenderer.sprite = Character2;
             BottomRenderer.sprite = Character2;
+            PlayerPreview.texture = Char2;
         }
     if (SpriteSelector.value == 3)
         {
             TopRenderer.sprite = Character3;
             BottomRenderer.sprite = Character3;
+            PlayerPreview.texture = Char3;
         }
     }
 }

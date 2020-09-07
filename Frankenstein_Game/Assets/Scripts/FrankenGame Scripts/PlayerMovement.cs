@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject PlayerParent, TopPlayer, BottomPlayer;
     private Rigidbody2D ParentRB,TopRB,BottomRB;
     private WorldFlip worldFlip;
-    private float x,speed = 6f;
+    private float x,speed = 10f;
     #endregion
     #region Menu Stuff
     public Canvas MainCanvas;
