@@ -6,6 +6,8 @@ public class MenuController : MonoBehaviour
 {
 public bool GameStarted = false, GamePaused;
 private GameObject PauseMenu, ControlsMenu,MainMenu,CustomizationMenu;
+public FinishScript F_Control;
+
 private void Awake()
     {
     PauseMenu = GameObject.Find("PausePanel");ControlsMenu = GameObject.Find("ControlsPanel");
@@ -14,7 +16,7 @@ private void Awake()
     }
 private void Update()
     {
-        if(GamePaused == true)
+        if(Input.GetKeyDown(KeyCode.P))
         {
             PauseMenu.SetActive(true);
         }
@@ -30,5 +32,17 @@ public void StartGame()
 public void PauseGame()
     {
         GamePaused = false;
+    }
+public void PauseMenuReturn()
+    {
+        if(GamePaused == true)
+        {
+            PauseMenu.SetActive(true);
+            ControlsMenu.SetActive(false);
+        }
+        else
+        {
+            ControlsMenu.SetActive(true);
+        }
     }
 }

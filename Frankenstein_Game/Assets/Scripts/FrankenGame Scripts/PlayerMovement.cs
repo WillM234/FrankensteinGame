@@ -8,7 +8,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject PlayerParent, TopPlayer, BottomPlayer;
     private Rigidbody2D ParentRB,TopRB,BottomRB;
     private WorldFlip worldFlip;
-    private float x,speed = 10f;
+    private float x;
+    public float speed;//this is set in the Speed_PickUp Script
     #endregion
     #region Menu Stuff
     public Canvas MainCanvas;
