@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainScenes/FrankenGameMain.unity
+    guid: 419f7a57cdda342b795eab8e3bfc5e4e
   m_configObjects: {}
